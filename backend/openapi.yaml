@@ -1,0 +1,37 @@
+openapi: 3.0.3
+info:
+  title: HTTP Terminal API
+  description: Execute shell commands via HTTP
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /exec:
+    post:
+      summary: Execute a shell command
+      description: Executes the provided shell command and returns the output
+      operationId: execCommand
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+            example: curl https://google.com
+      responses:
+        '200':
+          description: Command output
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |
+                <!doctype html>
+                <html>...
+        '404':
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: Not found
